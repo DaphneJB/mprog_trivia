@@ -37,15 +37,16 @@ public class GameRequest implements Response.Listener<JSONObject>, Response.Erro
     @Override
     public void onResponse(JSONObject response) {
         try {
-            incorrectAnswer = new ArrayList<>();
             questions = new ArrayList<>();
             category = response.getJSONArray("results");
             for(int i = 0; i < category.length(); i++) {
+                incorrectAnswer = new ArrayList<>();
                 JSONObject item = category.getJSONObject(i);
                 JSONArray incorrect = item.getJSONArray("incorrect_answers");
                 //get incorrect answer options
+                System.out.println("hoeveel incorrecte? " + incorrect.length());
                 for (int j = 0; j < incorrect.length(); j++) {
-                    incorrectAnswer.add(incorrect.getString(i));
+                    incorrectAnswer.add(incorrect.getString(j));
                 }
                 questions.add(new Question(item.getString("question"), item.getString("difficulty"),
                         item.getString("correct_answer"), incorrectAnswer));
@@ -58,7 +59,7 @@ public class GameRequest implements Response.Listener<JSONObject>, Response.Erro
     }
 
     public interface Callback {
-        void gotQuestions(ArrayList<Question> categories);
+        void gotQuestions(ArrayList<Question>questions);
         void gotQuestionsError(String message);
     }
 

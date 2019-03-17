@@ -4,11 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuestionActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".QuestionActivity">
 
-    <ListView
-        android:id="@+id/questions"
+    <TextView
+        android:id="@+id/quest"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="TextView"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="473dp"
+        android:orientation="vertical"></LinearLayout>
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="answerClicked"
+        android:text="Check!" />
+
 </LinearLayout>
