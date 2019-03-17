@@ -4,13 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
+    android:background="@android:color/holo_blue_dark"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
+        android:layout_height="541dp"
+        app:srcCompat="@drawable/trivi" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="146dp"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/open_graph_fun_facts_and_trivia" />
+        android:layout_gravity="center_horizontal"
+        android:background="?attr/colorButtonNormal"
+        android:onClick="startClicked"
+        android:text="Start!" />
+
 </LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OptionsActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/diffLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Select the difficulty level:"
+        android:textSize="20sp" />
+
+    <RadioGroup
+        android:id="@+id/difficulty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp">
+
+        <RadioButton
+            android:id="@+id/easy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="easy"
+            android:onClick="buttonClicked"/>
+
+        <RadioButton
+            android:id="@+id/medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="medium"
+            android:onClick="buttonClicked"/>
+
+        <RadioButton
+            android:id="@+id/difficult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="difficult"
+            android:onClick="buttonClicked"/>
+
+        <RadioButton
+            android:id="@+id/random"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="random"
+            android:onClick="buttonClicked"/>
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/numbQuest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
+        android:text="Number of questions:"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/numberQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="number of questions"
+        android:inputType="number"
+        android:paddingLeft="10dp" />
+
+    <Button
+        android:id="@+id/startGame"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="startGameClicked"
+        android:text="Get started!" />
+</LinearLayout>
