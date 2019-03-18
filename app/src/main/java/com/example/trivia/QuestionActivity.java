@@ -1,6 +1,7 @@
 package com.example.trivia;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,12 +15,15 @@ import java.util.ArrayList;
 public class QuestionActivity extends AppCompatActivity implements GameRequest.Callback{
     private ArrayList questions;
     private int questionNumber;
+    private Question question;
+    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
         questionNumber = 0;
+        score = 0;
         Intent intent = getIntent();
         //get amount of questions and level of difficulty
         String amount = (String) intent.getSerializableExtra("questionAmount");
@@ -40,14 +44,15 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
     }
 
     public void updateScreen() {
-        Question question =  (Question) questions.get(questionNumber);
+        question =  (Question) questions.get(questionNumber);
         TextView q = findViewById(R.id.quest);
         q.setText(question.getQuestion());
         ArrayList answers = question.getAllAnswers();
+        //make answer buttons
         for(int i = 0; i < answers.size(); i++) {
             Button myButton = new Button(this);
             myButton.setText(answers.get(i).toString());
-
+            myButton.setOnClickListener(new ClickListener());
             LinearLayout ll = findViewById(R.id.buttonLayout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.addView(myButton, lp);
@@ -55,16 +60,37 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         questionNumber++;
     }
 
-    public void answerClicked(View view) {
-        System.out.println("aantal " + questions.size());
-        System.out.println("aantal1 " + questionNumber);
-        if(questionNumber < questions.size()) {
-            ViewGroup layout = (ViewGroup) findViewById(R.id.buttonLayout);
-            layout.removeAllViews();
-            updateScreen();
-        }
-        else {
-
+    private class ClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Button answer = (Button) v;
+            //check if answer is correct
+            checkAnswer(answer.getText().toString());
+            //check if there are more questions left
+            if(questionNumber < questions.size()) {
+                ViewGroup layout = findViewById(R.id.buttonLayout);
+                layout.removeAllViews();
+                updateScreen();
+            }
+            //there are no more questions left
+            else {
+                
+            }
         }
     }
+
+    //checks if the given answer is correct
+    public void checkAnswer(String answer) {
+        if(question.getCorrectAnswer().equals(answer)){
+            //update score when correct answer
+            score++;
+            TextView totScore = findViewById(R.id.score);
+            totScore.setText("Score: " + score);
+            Toast.makeText(this, "correct", Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(this, "incorrect", Toast.LENGTH_LONG).show();
+        }
+    }
+
 }

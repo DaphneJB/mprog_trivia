@@ -26,6 +26,7 @@ public class GameRequest implements Response.Listener<JSONObject>, Response.Erro
     public GameRequest(Context cont, String amount, String difficulty) {
         this.amount = "amount=" + amount;
         this.difficulty = "&difficulty=" + difficulty;
+        if (difficulty.equals("random")) this.difficulty = "";
         context = cont;
     }
 
