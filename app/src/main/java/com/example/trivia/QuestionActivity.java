@@ -74,7 +74,7 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
             }
             //there are no more questions left
             else {
-                
+                goToResult();
             }
         }
     }
@@ -91,6 +91,13 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         else {
             Toast.makeText(this, "incorrect", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void goToResult() {
+        Intent intent = new Intent(this, ResultActivity.class);
+        System.out.println("help " + score);
+        intent.putExtra("score", score);
+        startActivity(intent);
     }
 
 }
