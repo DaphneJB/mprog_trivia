@@ -37,7 +37,7 @@ public class HighscoreRequest implements Response.Listener<String>, Response.Err
 
     public void postHighscore(HighscoreRequest.Callback activity) {
         this.activity = activity;
-        String url = "http://ide50-daphnejb.legacy.cs50.io:8080/list/post";
+        String url = "https://ide50-daphnejb.legacy.cs50.io:8080/list";
         RequestQueue queue = Volley.newRequestQueue(context);
         PostRequest request = new PostRequest(Request.Method.POST, url, this, this, name, score);
         queue.add(request);
