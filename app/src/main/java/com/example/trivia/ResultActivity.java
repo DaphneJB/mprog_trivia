@@ -14,6 +14,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class ResultActivity extends AppCompatActivity implements HighscoreRequest.Callback {
 
@@ -36,6 +38,7 @@ public class ResultActivity extends AppCompatActivity implements HighscoreReques
     public void gotScores(ArrayList<Score> scores) {
         System.out.println("scores " + scores.size());
         System.out.println("wat is dit " + scores.get(0).getName());
+        Collections.sort(scores, new SortByScore());
         ListAdapter adapter = new ScoreAdapter(this, R.layout.activity_result, scores);
         ListView view = findViewById(R.id.view);
         view.setAdapter(adapter);

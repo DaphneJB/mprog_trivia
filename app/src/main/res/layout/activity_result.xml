@@ -31,6 +31,14 @@
         android:onClick="highscoreClicked"
         android:text="Save score" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scoreboard"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
     <ListView
         android:id="@+id/view"
         android:layout_width="match_parent"
