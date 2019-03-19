@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,11 +29,16 @@ public class ResultActivity extends AppCompatActivity implements HighscoreReques
         EditText name = findViewById(R.id.name);
         HighscoreRequest req = new HighscoreRequest(this, score, name.getText().toString());
         req.postHighscore(this);
+        view.setEnabled(false);
     }
 
     @Override
-    public void gotScores(ArrayList<String> scores) {
-        scores.get(0);
+    public void gotScores(ArrayList<Score> scores) {
+        System.out.println("scores " + scores.size());
+        System.out.println("wat is dit " + scores.get(0).getName());
+        ListAdapter adapter = new ScoreAdapter(this, R.layout.activity_result, scores);
+        ListView view = findViewById(R.id.view);
+        view.setAdapter(adapter);
     }
 
     @Override

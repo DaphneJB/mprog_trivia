@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResultActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ResultActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -30,4 +30,9 @@
         android:layout_gravity="center_horizontal"
         android:onClick="highscoreClicked"
         android:text="Save score" />
+
+    <ListView
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
