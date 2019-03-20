@@ -8,6 +8,7 @@ import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,16 +19,19 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class ResultActivity extends AppCompatActivity implements HighscoreRequest.Callback {
+    private String score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        Intent intent = getIntent();
+        score = "" + (int) intent.getSerializableExtra("score");
+        TextView view = findViewById(R.id.totalScore);
+        view.setText("Your score: " + score);
     }
 
     public void highscoreClicked(View view) {
-        Intent intent = getIntent();
-        String score = "" + (int) intent.getSerializableExtra("score");
         EditText name = findViewById(R.id.name);
         HighscoreRequest req = new HighscoreRequest(this, score, name.getText().toString());
         req.postHighscore(this);
@@ -36,8 +40,6 @@ public class ResultActivity extends AppCompatActivity implements HighscoreReques
 
     @Override
     public void gotScores(ArrayList<Score> scores) {
-        System.out.println("scores " + scores.size());
-        System.out.println("wat is dit " + scores.get(0).getName());
         Collections.sort(scores, new SortByScore());
         ListAdapter adapter = new ScoreAdapter(this, R.layout.activity_result, scores);
         ListView view = findViewById(R.id.view);
