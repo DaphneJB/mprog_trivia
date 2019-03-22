@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+//Represents an option menu where the user can select the difficulty level and the amount of questions
 public class OptionsActivity extends AppCompatActivity {
     private String selectedLevel;
     private String questions;
@@ -29,9 +30,9 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     public void startGameClicked(View view) {
-        EditText numberOfQuestions = findViewById(R.id.numberQuestion);
-        //get the number of questions
-        questions = numberOfQuestions.getText().toString();
+        EditText amountOfQuestions = findViewById(R.id.numberQuestion);
+        //get the amount of questions
+        questions = amountOfQuestions.getText().toString();
         System.out.println("Number of questions " + questions);
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra("questionAmount", questions);

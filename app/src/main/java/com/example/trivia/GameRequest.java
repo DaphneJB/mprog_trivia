@@ -45,7 +45,6 @@ public class GameRequest implements Response.Listener<JSONObject>, Response.Erro
                 JSONObject item = category.getJSONObject(i);
                 JSONArray incorrect = item.getJSONArray("incorrect_answers");
                 //get incorrect answer options
-                System.out.println("hoeveel incorrecte? " + incorrect.length());
                 for (int j = 0; j < incorrect.length(); j++) {
                     incorrectAnswer.add(incorrect.getString(j));
                 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 
+//Manages the questions and checks if the user clicks the correct answer
 public class QuestionActivity extends AppCompatActivity implements GameRequest.Callback{
     private ArrayList questions;
     private int questionNumber, score;
@@ -42,6 +43,7 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         }
     }
 
+    //get all the questions
     @Override
     public void gotQuestions(ArrayList<Question> questions) {
         this.questions = questions;
@@ -75,9 +77,9 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         public void onClick(View v) {
             questionNumber++;
             Button answer = (Button) v;
-            //check if answer is correct
+            //checks if answer is correct
             checkAnswer(answer.getText().toString());
-            //check if there are more questions left
+            //checks if there are more questions left
             if(questionNumber < questions.size()) {
                 ViewGroup layout = findViewById(R.id.buttonLayout);
                 layout.removeAllViews();
@@ -104,7 +106,7 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         }
     }
 
-    //get the final score 
+    //get the final score
     public void goToResult() {
         Intent intent = new Intent(this, ResultActivity.class);
         finish();

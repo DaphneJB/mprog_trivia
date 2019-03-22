@@ -1,5 +1,6 @@
 package com.example.trivia;
 
+//represents a score class with a score and a given name
 public class Score {
     private String score, name;
 

@@ -34,13 +34,11 @@ public class HighscoreRequest implements Response.Listener<String>, Response.Err
 
     @Override
     public void onResponse(String response) {
-        System.out.println("wat " + response);
         scores = new ArrayList<Score>();
         try {
             JSONArray jsonoArray = new JSONArray(response);
             for(int i = 0; i < jsonoArray.length(); i++) {
                 JSONObject jsonObject = jsonoArray.getJSONObject(i);
-                System.out.println("wat is " + jsonObject);
                 scores.add(new Score(jsonObject.getString("score"), jsonObject.getString("name")));
             }
         } catch (JSONException e) {
