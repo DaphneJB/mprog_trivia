@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -43,15 +44,16 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+    //shows the appropriate question and answers
     public void updateScreen() {
         question =  (Question) questions.get(questionNumber);
         TextView q = findViewById(R.id.quest);
-        q.setText(question.getQuestion());
+        q.setText(Html.fromHtml(question.getQuestion()));
         ArrayList answers = question.getAllAnswers();
         //make answer buttons
         for(int i = 0; i < answers.size(); i++) {
             Button myButton = new Button(this);
-            myButton.setText(answers.get(i).toString());
+            myButton.setText(Html.fromHtml(answers.get(i).toString()));
             myButton.setOnClickListener(new ClickListener());
             LinearLayout ll = findViewById(R.id.buttonLayout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
