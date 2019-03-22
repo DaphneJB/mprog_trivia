@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 public class QuestionActivity extends AppCompatActivity implements GameRequest.Callback{
     private ArrayList questions;
-    private int questionNumber;
+    private int questionNumber, score;
     private Question question;
-    private int score;
+    private GameRequest req;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +25,21 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         setContentView(R.layout.activity_question);
         questionNumber = 0;
         score = 0;
-        Intent intent = getIntent();
-        //get amount of questions and level of difficulty
-        String amount = (String) intent.getSerializableExtra("questionAmount");
-        String level = (String) intent.getSerializableExtra("level");
-        GameRequest req = new GameRequest(this, amount, level);
-        req.getQuestions(this);
+        if(savedInstanceState == null) {
+            Intent intent = getIntent();
+            //get amount of questions and level of difficulty
+            String amount = (String) intent.getSerializableExtra("questionAmount");
+            String level = (String) intent.getSerializableExtra("level");
+
+            req = new GameRequest(this, amount, level);
+            req.getQuestions(this);
+        }
+        else {
+            questions = savedInstanceState.getParcelableArrayList("questions");
+            questionNumber = savedInstanceState.getInt("questionNumber");
+            score = savedInstanceState.getInt("score");
+            updateScreen();
+        }
     }
 
     @Override
@@ -59,12 +68,12 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             ll.addView(myButton, lp);
         }
-        questionNumber++;
     }
 
     private class ClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            questionNumber++;
             Button answer = (Button) v;
             //check if answer is correct
             checkAnswer(answer.getText().toString());
@@ -95,12 +104,22 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         }
     }
 
+    //get the final score 
     public void goToResult() {
         Intent intent = new Intent(this, ResultActivity.class);
         finish();
         System.out.println("help " + score);
         intent.putExtra("score", score);
         startActivity(intent);
+    }
+
+    //save question number, score and questions
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("questions", questions);
+        outState.putInt("questionNumber", questionNumber);
+        outState.putInt("score", score);
     }
 
 }
