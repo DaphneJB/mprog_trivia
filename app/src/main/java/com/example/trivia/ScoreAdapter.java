@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+//Represents an adapter that takes a list of scores and formats it to display
 public class ScoreAdapter extends ArrayAdapter<Score> {
     private ArrayList<Score> score;
 
@@ -29,6 +30,5 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
         price.setText(score.get(position).getName());
 
         return convertView;
-
     }
 }

@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+//this request class is used to get a all the scores on the board as well as posting new ones on it
 public class HighscoreRequest implements Response.Listener<String>, Response.ErrorListener {
     private HighscoreRequest.Callback activity;
     private Context context;
@@ -36,18 +37,20 @@ public class HighscoreRequest implements Response.Listener<String>, Response.Err
     public void onResponse(String response) {
         scores = new ArrayList<Score>();
         try {
-            JSONArray jsonoArray = new JSONArray(response);
-            for(int i = 0; i < jsonoArray.length(); i++) {
-                JSONObject jsonObject = jsonoArray.getJSONObject(i);
+            //get scores on the board
+            JSONArray jsonArray = new JSONArray(response);
+            for(int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
                 scores.add(new Score(jsonObject.getString("score"), jsonObject.getString("name")));
             }
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
+        //check if there are scores on the board
         if(scores.size() != 0) {
             activity.gotScores(scores);
         }
-
     }
 
     public interface Callback {
@@ -59,7 +62,9 @@ public class HighscoreRequest implements Response.Listener<String>, Response.Err
         this.activity = activity;
         String url = "https://ide50-daphnejb.legacy.cs50.io:8080/list";
         RequestQueue queue = Volley.newRequestQueue(context);
+        //post score
         PostRequest request = new PostRequest(Request.Method.POST, url, this, this, name, score);
+        //get scores on the board
         String scores = "https://ide50-daphnejb.legacy.cs50.io:8080/list";
         Request requestScores = new StringRequest(Request.Method.GET, scores, this, this);
         queue.add(request);

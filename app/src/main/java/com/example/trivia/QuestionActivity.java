@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 //Manages the questions and checks if the user clicks the correct answer
-public class QuestionActivity extends AppCompatActivity implements GameRequest.Callback{
+public class QuestionActivity extends AppCompatActivity implements GameRequest.Callback {
     private ArrayList questions;
     private int questionNumber, score;
     private Question question;
@@ -58,17 +58,25 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
     //shows the appropriate question and answers
     public void updateScreen() {
         question =  (Question) questions.get(questionNumber);
+        //show question
         TextView q = findViewById(R.id.quest);
         q.setText(Html.fromHtml(question.getQuestion()));
+        //show user the difficulty per question
+        TextView difficulty = findViewById(R.id.difficulty);
+        difficulty.setText("Difficulty level: " +question.getDifficulty());
+        //show the user how many questions are left
+        TextView number = findViewById(R.id.number);
+        number.setText(questionNumber + 1 + "/" + questions.size());
         ArrayList answers = question.getAllAnswers();
         //make answer buttons
         for(int i = 0; i < answers.size(); i++) {
             Button myButton = new Button(this);
+            //make answer button
             myButton.setText(Html.fromHtml(answers.get(i).toString()));
             myButton.setOnClickListener(new ClickListener());
-            LinearLayout ll = findViewById(R.id.buttonLayout);
+            LinearLayout layout = findViewById(R.id.buttonLayout);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            ll.addView(myButton, lp);
+            layout.addView(myButton, lp);
         }
     }
 
@@ -77,9 +85,9 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         public void onClick(View v) {
             questionNumber++;
             Button answer = (Button) v;
-            //checks if answer is correct
+            //check if answer is correct
             checkAnswer(answer.getText().toString());
-            //checks if there are more questions left
+            //check if there are more questions left
             if(questionNumber < questions.size()) {
                 ViewGroup layout = findViewById(R.id.buttonLayout);
                 layout.removeAllViews();
@@ -92,13 +100,13 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         }
     }
 
-    //checks if the given answer is correct
+    //check if the given answer is correct
     public void checkAnswer(String answer) {
         if(question.getCorrectAnswer().equals(answer)){
             //update score when correct answer
             score++;
             TextView totScore = findViewById(R.id.score);
-            totScore.setText("Score: " + score);
+            totScore.setText("Correct: " + score);
             Toast.makeText(this, "correct", Toast.LENGTH_LONG).show();
         }
         else {
@@ -110,8 +118,7 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
     public void goToResult() {
         Intent intent = new Intent(this, ResultActivity.class);
         finish();
-        System.out.println("help " + score);
-        intent.putExtra("score", score);
+        intent.putExtra("score", (double)score/questions.size());
         startActivity(intent);
     }
 
@@ -123,5 +130,4 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
         outState.putInt("questionNumber", questionNumber);
         outState.putInt("score", score);
     }
-
 }

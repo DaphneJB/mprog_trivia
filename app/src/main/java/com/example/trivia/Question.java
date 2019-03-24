@@ -2,7 +2,7 @@ package com.example.trivia;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+//represents a question with a given level of difficulty, correct & incorrect answers
 public class Question {
     private String question, difficulty, correctAnswer;
     private ArrayList allAnswers;

@@ -19,7 +19,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-
+//shows the user the final score and makes it possible to add the score to the scoreboard and shows the scoreboard
 public class ResultActivity extends AppCompatActivity implements HighscoreRequest.Callback {
     private String score;
     private Button saveScore;
@@ -33,12 +33,13 @@ public class ResultActivity extends AppCompatActivity implements HighscoreReques
         setContentView(R.layout.activity_result);
         saveScore = findViewById(R.id.save);
         Intent intent = getIntent();
-        score = "" + (int) intent.getSerializableExtra("score");
+        //get score of the user and show it to the user
+        score = "" + (double) intent.getSerializableExtra("score");
         TextView view = findViewById(R.id.totalScore);
         view.setText("Your score: " + score);
 
         if(savedInstanceState != null){
-            System.out.println(savedInstanceState.getBoolean("buttonEnabled"));
+            //check if user has clicked to save the score
             saveScore.setEnabled(savedInstanceState.getBoolean("buttonEnabled"));
             allScores = savedInstanceState.getParcelableArrayList("allScores");
             if(allScores.size() != 0) gotScores(allScores);
@@ -47,9 +48,11 @@ public class ResultActivity extends AppCompatActivity implements HighscoreReques
 
     public void highscoreClicked(View view) {
         EditText name = findViewById(R.id.name);
+        //post score to the score board with the users score and his entered name
         HighscoreRequest req = new HighscoreRequest(this, score, name.getText().toString());
         req.postHighscore(this);
         saveScore = (Button) view;
+        //make sure the user can't click again on the save button
         saveScore.setEnabled(false);
     }
 
@@ -68,7 +71,7 @@ public class ResultActivity extends AppCompatActivity implements HighscoreReques
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-    //save if the button is enabled and save highscore list
+    //save the state of the button (enabled or not) and save scoreboard
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

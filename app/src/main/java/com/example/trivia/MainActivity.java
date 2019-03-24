@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-
+//shows the homescreen of the trivia app
 public class MainActivity extends AppCompatActivity {
 
     @Override

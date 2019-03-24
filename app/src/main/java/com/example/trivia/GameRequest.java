@@ -13,7 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
+//this request class is used to get a set random questions of a given amount and difficulty level
 public class GameRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     private Context context;
@@ -39,6 +39,7 @@ public class GameRequest implements Response.Listener<JSONObject>, Response.Erro
     public void onResponse(JSONObject response) {
         try {
             questions = new ArrayList<>();
+            //get a random set of questions
             category = response.getJSONArray("results");
             for(int i = 0; i < category.length(); i++) {
                 incorrectAnswer = new ArrayList<>();
@@ -48,11 +49,13 @@ public class GameRequest implements Response.Listener<JSONObject>, Response.Erro
                 for (int j = 0; j < incorrect.length(); j++) {
                     incorrectAnswer.add(incorrect.getString(j));
                 }
+                //make an arraylist of questions with incorrect and correct answers
                 questions.add(new Question(item.getString("question"), item.getString("difficulty"),
                         item.getString("correct_answer"), incorrectAnswer));
             }
             activity.gotQuestions(questions);
-        } catch (JSONException e) {
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
 

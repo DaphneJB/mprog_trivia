@@ -2,7 +2,7 @@ package com.example.trivia;
 
 import java.util.Comparator;
 
-//compares two scores with each other
+//Represents a comparator that compares two scores with each other
 public class SortByScore implements Comparator<Score> {
     @Override
     public int compare(Score o1, Score o2) {
