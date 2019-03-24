@@ -118,7 +118,7 @@ public class QuestionActivity extends AppCompatActivity implements GameRequest.C
     public void goToResult() {
         Intent intent = new Intent(this, ResultActivity.class);
         finish();
-        intent.putExtra("score", (double)score/questions.size());
+        intent.putExtra("score", ((int)(((double)score/questions.size())*10)));
         startActivity(intent);
     }
 

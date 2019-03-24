@@ -34,7 +34,7 @@ public class ResultActivity extends AppCompatActivity implements HighscoreReques
         saveScore = findViewById(R.id.save);
         Intent intent = getIntent();
         //get score of the user and show it to the user
-        score = "" + (double) intent.getSerializableExtra("score");
+        score = "" + (int) intent.getSerializableExtra("score");
         TextView view = findViewById(R.id.totalScore);
         view.setText("Your score: " + score);
 
