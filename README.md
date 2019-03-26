@@ -12,6 +12,6 @@ When all the settings are entered correctly, the game starts!
 
 The textview in the left corner shows the level of difficulty of each question. The textview in the right corner shows the amount of correct answers. When clicked on an answer, a toast notification will show if the answer is correct.
 
-When all questions are answered, the app will show the total score to the user. The user is now able to enter his score to the scoreboard. When clicked on save, the scoreboard will be showed.
+When all questions are answered, the app will show the total score to the user. The user is now able to enter his score to the scoreboard. When clicked on save, the scoreboard will be showed. When clicked on the back button of the phone, the user can start a new Trivia game.
 
 <img src="https://github.com/DaphneJB/mprog_trivia/blob/master/doc/scoreboard.png" width="40%">
